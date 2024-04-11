@@ -26,6 +26,12 @@ const sendMessage = async(req,res)=>{
         if(newMessage){
             conversation.messages.push(newMessage._id)
         }
+
+        //soket io functionality will go here
+
+
+
+
         //await conversation.save();
         //await newMessage.save();
 
@@ -41,6 +47,28 @@ const sendMessage = async(req,res)=>{
     }
 }
 
+const getMessages = async(req,res)=>{
+  try {
+    const {id:userToChatId} = req.params;
+    const senderId = req.user._id;
+    
+    const conversation = await Conversation.findOne({
+        participants:{$all: [senderId ,userToChatId]},
+    }).populate("messages");//Not Reference but actual message
+
+    if(!conversation)return res.status(200).json([]);
+  
+    const message = conversation.messages
+    res.status(200)
+    .json(message);
+
+    
+  } catch (error) {
+    console.log("Error in get message controller" ,error.message)
+    res.status(500).json({error: error.message})
+  }
+}
 export {
-    sendMessage
+    sendMessage,
+    getMessages
 }

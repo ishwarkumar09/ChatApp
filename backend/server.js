@@ -17,6 +17,8 @@ const app = express();
 
 app.use(express.json()); //to parse the incoming request with json payloads (from req.body)
 app.use(cookieParser());
+
+
 app.use("/api/auth", authRoutes)
 app.use("/api/messages", messageRoutes)
 
