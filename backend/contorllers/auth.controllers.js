@@ -21,8 +21,8 @@ const signup = async(req ,res)=>{
    const hashedPassword = await bcrypt.hash(password ,salt)
    
 
-   const boyProfilePic = `https://avatar.iran.liara.run/public/boy?username=${username}`
-   const girlProfilePic = `https://avatar.iran.liara.run/public/girl?username=${username}`
+   const boyProfilePic = `https://avatars.abstractapi.com/v1/?api_key=1c9976cbd91146a58d78a9e34a47bf59&name=${username}`
+   const girlProfilePic = `https://avatars.abstractapi.com/v1/?api_key=1c9976cbd91146a58d78a9e34a47bf59&name=${username}`
 
    const newUser = new User({
       fullName,
